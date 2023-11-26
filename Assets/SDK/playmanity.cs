@@ -20,6 +20,8 @@ namespace Playmanity {
     public class playmanity : MonoBehaviour
     {
         public static string api_base = "https://api.playmanity.net";
+        public static int startLevel = 1;
+
         public static response login(string username, string password)
         {
             WWWForm form = new WWWForm();
