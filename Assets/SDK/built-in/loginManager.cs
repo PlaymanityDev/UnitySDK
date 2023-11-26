@@ -4,6 +4,8 @@ using UnityEngine;
 using Playmanity;
 using TMPro;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Text;
 
 public class loginManager : MonoBehaviour
 {
@@ -39,6 +41,13 @@ public class loginManager : MonoBehaviour
             string token = (string)JObject.Parse(response.message)["value"];
             playerManager.token = token;
             PlayerPrefs.SetString("playmanity-jwt-token", playerManager.token);
+
+            string payload = token.Split(".")[1];
+            string paddedPayload = PadBase64Url(payload);
+            byte[] decodedBytes = Convert.FromBase64String(paddedPayload);
+            string decodedPayload = Encoding.UTF8.GetString(decodedBytes);
+
+            Debug.Log(decodedPayload);
         }
     }
 
@@ -55,5 +64,10 @@ public class loginManager : MonoBehaviour
         {
             PlayerPrefs.DeleteKey("playmanity-jwt-token");
         }
+    }
+    static string PadBase64Url(string base64Url)
+    {
+        int padding = (4 - base64Url.Length % 4) % 4;
+        return base64Url + new string('=', padding);
     }
 }
