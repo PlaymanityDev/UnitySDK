@@ -20,7 +20,7 @@ namespace Playmanity
         public static bool validate(string token)
         {
             // NOT IMPLEMENTED.
-            return true;
+            return false;
         }
 
         public static void insertData(string token)
