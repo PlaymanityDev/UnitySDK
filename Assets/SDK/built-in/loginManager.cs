@@ -25,7 +25,7 @@ public class loginManager : MonoBehaviour
 
         if (response.code == 403 || response.code == 404)
         {
-            text.text = (string)JObject.Parse(response.message)["error"];
+            text.text = (string)JObject.Parse(response.message)["errors"][0]["msg"];
         }
 
         if (response.code == 500 || response.code == 502)

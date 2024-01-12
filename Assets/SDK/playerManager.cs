@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 namespace Playmanity
 {
@@ -19,8 +20,28 @@ namespace Playmanity
         [System.Obsolete]
         public static bool validate(string token)
         {
-            // NOT IMPLEMENTED.
-            return false;
+            playmanitySettings settings = playmanitySettings.Instance;
+            UnityWebRequest uwr = UnityWebRequest.Post(settings.api_base + $"/user/validate", $"{{ \"token\": {token}}}");
+            uwr.SendWebRequest();
+
+
+            while (!uwr.isDone)
+            {
+
+            }
+            response response = new response(uwr.responseCode, uwr.downloadHandler.text);
+            UnityWebRequest.Result result = uwr.result;
+            uwr.Dispose();
+            // Check for errors
+            if (result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Error: {response.code}, {response.message}");
+                return false;
+            }
+            else
+            {
+                return (bool)JObject.Parse(response.message)["status"];
+            }
         }
 
         public static void insertData(string token)
@@ -35,9 +56,9 @@ namespace Playmanity
             id = (string)payloadJSON["iss"];
             roles = payloadJSON["roles"].ToString().Split(',');
             id = (string)payloadJSON["iss"];
-            expire = (int)payloadJSON["exp"];
 
-            SceneManager.LoadScene(playmanity.startLevel);
+            playmanitySettings settings = playmanitySettings.Instance;
+            SceneManager.LoadScene(settings.startLevel);
         }
 
         static string PadBase64Url(string base64Url)

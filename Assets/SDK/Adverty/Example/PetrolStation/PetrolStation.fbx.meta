@@ -1,0 +1,410 @@
+fileFormatVersion: 2
+guid: 1d8d5e9feb56abf41a962227ae87f1b3
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: Take 001
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bench_Steel
+    second: {fileID: 2100000, guid: 737086b5f5aacd244a05b86d9345c1ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bench_Wood
+    second: {fileID: 2100000, guid: f5ea42c05c5ed7548895c214a9efc236, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BlackMatte
+    second: {fileID: 2100000, guid: ec81278819ee0a84baba1fa20e069b39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Board
+    second: {fileID: 2100000, guid: 854fa8d1203a1384ca572faceeed4479, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Concrete
+    second: {fileID: 2100000, guid: eb39154c8069e0c4bb322879ec129bb9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Display
+    second: {fileID: 2100000, guid: efc95bc9b97c20c438a7b3d340777e7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fuel_Base
+    second: {fileID: 2100000, guid: c057b7a244cb99142819d72e75745c36, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fuel_Bottom
+    second: {fileID: 2100000, guid: 226f08e1da8c98d4ba6fbdd629e28f0e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fuel_Chrome
+    second: {fileID: 2100000, guid: d95387d3ac6041540be91fb24cfba370, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fuel_Gun
+    second: {fileID: 2100000, guid: 59f1570b4399b8c499b8b8242209511e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fuel_Hose
+    second: {fileID: 2100000, guid: 9134c467312d6674b9cbbe23c72dd107, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass_Area
+    second: {fileID: 2100000, guid: 09862b42989785946b0ceef318bece5b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lamp
+    second: {fileID: 2100000, guid: 67d1e706d6cbbe445b70223f18cdd6ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lamp_Glass
+    second: {fileID: 2100000, guid: dc7f2f5b23d8d4044ba815eefd663ef5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light
+    second: {fileID: 2100000, guid: e500ca46a6c0c334cb1bbd58150c5db2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightBase
+    second: {fileID: 2100000, guid: 9aec5ef270a39ce42a597ffd21c94544, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Logo
+    second: {fileID: 2100000, guid: 8f0f62d804aee834ca2b2a88083368ed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_BlackBoard_Ad001
+    second: {fileID: 2100000, guid: f714d21ebb9bb4c4cb4d1d7ba6e47e8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_BlackBoard_Ad003
+    second: {fileID: 2100000, guid: 7695e9b711895b54dae8857c94bf3046, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_BlackBoard_Ad004
+    second: {fileID: 2100000, guid: 359b7a83575c8c940a28be80b0da0500, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_BlackBoard_AdBacker
+    second: {fileID: 2100000, guid: 43d39fa7c450ab64984899acf7e411e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_BlackBoard_AdBacker001
+    second: {fileID: 2100000, guid: 914a96a9b477b754fb9f84cd06801f03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_Frame
+    second: {fileID: 2100000, guid: 5d8d54c0eaafdff47bde87b35929f91a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_Frame001
+    second: {fileID: 2100000, guid: c0a2b6c2d75c4e44ab6d77e4c25c6e31, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: OutDoor_Cylindrical_FloorStand_Ad001
+    second: {fileID: 2100000, guid: aa8abd2483d606d41abe88f683341434, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: OutDoor_Cylindrical_FloorStand_Ad002
+    second: {fileID: 2100000, guid: dc1e804f3769cfa4483a8ef17324f4cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: OutDoor_Cylindrical_FloorStand_Frame
+    second: {fileID: 2100000, guid: 0a242639bbceaf44291d35f04a6e5c31, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Petrol_Station_Billbord_Ad001
+    second: {fileID: 2100000, guid: 0f258adb21385d34f8c9927bc031a4d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Petrol_Station_Billbord_Backer
+    second: {fileID: 2100000, guid: d2dc0bcd569e980448dfb536b60abd3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Petrol_Station_Billbord_Base
+    second: {fileID: 2100000, guid: d35765df5ea63ab449a796e3f06849f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Petrol_Station_Ceiling
+    second: {fileID: 2100000, guid: 9b73ff728d5acfc4a848b939569ef5d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Petrol_Station_Store
+    second: {fileID: 2100000, guid: ff99a3121d6784c449447b2403277108, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pillar
+    second: {fileID: 2100000, guid: 6a4e578df77a79e4380d5de068ce380f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Road
+    second: {fileID: 2100000, guid: 0605abe73b6ecc443a96225755605843, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RoadMarking
+    second: {fileID: 2100000, guid: bd1413991c8f80b49a3deb210d40a00b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stone
+    second: {fileID: 2100000, guid: 083d1806fd2485b4ea49f764ff3c5330, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Store_Door
+    second: {fileID: 2100000, guid: 35e033cbf573ea246a7d63752745e2d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Store_Door_Handle
+    second: {fileID: 2100000, guid: 3bcd156b52f3416418ce37e781596355, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bench_Steel
+    second: {fileID: 2800000, guid: 0f042b7e1131a5d4da7c3b698d00f23a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bench_Wood
+    second: {fileID: 2800000, guid: 9286c92ca22c03a49ae923dcb876a420, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Board
+    second: {fileID: 2800000, guid: c70f2d82ab93b294cbd7a2dc7213d972, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Concrete
+    second: {fileID: 2800000, guid: 5da6ece0e9654bc4b9f6a3d0a8754523, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fuel_Base
+    second: {fileID: 2800000, guid: 6d4448e64f40aad4eab1ac1de799a4e7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fuel_Bottom
+    second: {fileID: 2800000, guid: 6c0204fd7cf5c994a82dfee6d08151cb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: LightBase
+    second: {fileID: 2800000, guid: b0a43de1c51b9034b80d8a5553713d82, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Logo_
+    second: {fileID: 2800000, guid: 6a09676fc0d11494791e825e31c72a99, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_BlackBoard_ADBacker
+    second: {fileID: 2800000, guid: 3110131374eac384590d4c8a59e08aa2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_BlackBoard_ADBacker001
+    second: {fileID: 2800000, guid: 4b82a9b650c26364fb65ad869fe86f50, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_BlackBoard_Ad001
+    second: {fileID: 2800000, guid: 6e9ba69306bb437419946348fdc07d3c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_BlackBoard_Ad002
+    second: {fileID: 2800000, guid: afe096d080d069548ab2a3d6d2d0ec87, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_BlackBoard_Ad003
+    second: {fileID: 2800000, guid: 2a36f73e2c059ed4299bac63326e5306, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_BlackBoard_Ad004
+    second: {fileID: 2800000, guid: 7b3072cb579f05645a14f9f25ffadaac, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_BlackBoard_Frame
+    second: {fileID: 2800000, guid: 5d995b03de693004bb17dbeecb6dbef1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Menu_Stander_Board_BlackBoard_Frame001
+    second: {fileID: 2800000, guid: e4bd208156c8228499cc01e389c6a239, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: OutDoor_Cylindrical_FloorStand_Ad001
+    second: {fileID: 2800000, guid: 1866b1ca952006340ad1151bb2d71044, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: OutDoor_Cylindrical_FloorStand_Ad002
+    second: {fileID: 2800000, guid: 2ca2b30d2e0ddec4e99d996e101adcac, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: OutDoor_Cylindrical_FloorStand_Frame
+    second: {fileID: 2800000, guid: 0d5da462da0be1044a2233259f655359, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Petrol_Station_Billbord_Ad001
+    second: {fileID: 2800000, guid: 881bdf3340c6fd54a8d653eff5cb3908, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Petrol_Station_Billbord_Base
+    second: {fileID: 2800000, guid: 0449bfb666c6d9e4ba8732375dbdc0c4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Petrol_Station_Ceiling
+    second: {fileID: 2800000, guid: 1e288cb825d2b7d41a76b96427b32c19, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Petrol_Station_Store
+    second: {fileID: 2800000, guid: 56514ac8e6cfd424a806af158911891b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pillar
+    second: {fileID: 2800000, guid: c98da6e6392a4b947869ee80b67b8215, type: 3}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

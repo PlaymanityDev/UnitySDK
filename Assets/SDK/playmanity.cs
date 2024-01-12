@@ -19,17 +19,44 @@ namespace Playmanity {
 
     public class playmanity : MonoBehaviour
     {
-        public static string api_base = "https://api.playmanity.net";
-        public static int startLevel = 1;
+        public static response getKey()
+        {
+            playmanitySettings settings = playmanitySettings.Instance;
+            UnityWebRequest uwr = UnityWebRequest.Get(settings.api_base + $"/ads/sys/{settings.UUID}/key");
+            uwr.SendWebRequest();
+
+
+            while (!uwr.isDone)
+            {
+
+            }
+            response response = new response(uwr.responseCode, uwr.downloadHandler.text);
+            UnityWebRequest.Result result = uwr.result;
+            uwr.Dispose();
+            // Check for errors
+            if (result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Error: {response.code}, {response.message}");
+                return response;
+            }
+            else
+            {
+                // Print status code
+                Debug.Log($"Status Code: {response.code}");
+                Debug.Log($"Response Body: {response.message}");
+                return response;
+            }
+        }
 
         public static response login(string username, string password)
         {
+            playmanitySettings settings = playmanitySettings.Instance;
             WWWForm form = new WWWForm();
             form.AddField("username", username);
             form.AddField("password", password);
-            form.AddField("gameid", 0);
+            //form.AddField("gameid", 0);
 
-            UnityWebRequest uwr = UnityWebRequest.Post(api_base + "/sign-in", form);
+            UnityWebRequest uwr = UnityWebRequest.Post(settings.api_base + "/auth/sign-in", form);
             uwr.SendWebRequest();
 
 
