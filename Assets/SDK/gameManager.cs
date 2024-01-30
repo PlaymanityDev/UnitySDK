@@ -32,10 +32,10 @@ public class gameManager : MonoBehaviour
         {
             AdvertySettings.APIKey = settings.forceKeyOverride;
         }
+        AdvertySettings.SandboxMode = settings.SandboxMode;
+        AdvertySettings.SetMainCamera(mainCamera);
 
         AdvertySDK.Init(userData);
-
-        AdvertySettings.SetMainCamera(mainCamera);
     }
 
     // Update is called once per frame

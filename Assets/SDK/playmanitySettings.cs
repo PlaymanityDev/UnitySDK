@@ -7,6 +7,7 @@ public class playmanitySettings : ScriptableObject
     public int startLevel = 1;
     public string UUID = "";
     public string forceKeyOverride = "";
+    public bool SandboxMode = true;
 
     // Static property to get or create the instance
     private static playmanitySettings _instance;
@@ -27,6 +28,7 @@ public class playmanitySettings : ScriptableObject
                     _instance.startLevel = 1;
                     _instance.UUID = "";
                     _instance.forceKeyOverride = "";
+                    _instance.SandboxMode = true;
 
                     // Save the instance as an asset in the "settings" folder
                     UnityEditor.AssetDatabase.CreateFolder("Assets", "Resources");
