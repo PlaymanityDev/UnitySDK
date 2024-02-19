@@ -6,8 +6,6 @@ public class playmanitySettings : ScriptableObject
     public string api_base = "https://api.playmanity.net";
     public int startLevel = 1;
     public string UUID = "";
-    public string forceKeyOverride = "";
-    public bool SandboxMode = true;
 
     // Static property to get or create the instance
     private static playmanitySettings _instance;
@@ -27,8 +25,6 @@ public class playmanitySettings : ScriptableObject
                     _instance.api_base = "https://api.playmanity.net";
                     _instance.startLevel = 1;
                     _instance.UUID = "";
-                    _instance.forceKeyOverride = "";
-                    _instance.SandboxMode = true;
 
                     // Save the instance as an asset in the "settings" folder
                     UnityEditor.AssetDatabase.CreateFolder("Assets", "Resources");
@@ -38,7 +34,7 @@ public class playmanitySettings : ScriptableObject
                 }
                 else
                 {
-                    Debug.Log("playmanitySettings.asset loaded from settings folder.");
+                    // Debug.Log("playmanitySettings.asset loaded from settings folder.");
                 }
             }
 

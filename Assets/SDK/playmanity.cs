@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -19,20 +20,30 @@ namespace Playmanity {
 
     public class playmanity : MonoBehaviour
     {
-        public static response getKey()
+        public static async Task<response> getAd(string type)
         {
             playmanitySettings settings = playmanitySettings.Instance;
-            UnityWebRequest uwr = UnityWebRequest.Get(settings.api_base + $"/ads/sys/{settings.UUID}/key");
-            uwr.SendWebRequest();
+            string token = playerManager.token;
 
-
-            while (!uwr.isDone)
+            if (token == null)
             {
-
+                token = PlayerPrefs.GetString("playmanity-jwt-token");
             }
+
+            UnityWebRequest uwr = UnityWebRequest.Get(settings.api_base + $"/ads/game/{settings.UUID}/{type}");
+            uwr.SetRequestHeader("Authorization", token);
+            var asyncOperation = uwr.SendWebRequest();
+
+            // Wait until the operation is done
+            while (!asyncOperation.isDone)
+            {
+                await Task.Yield();
+            }
+
             response response = new response(uwr.responseCode, uwr.downloadHandler.text);
             UnityWebRequest.Result result = uwr.result;
             uwr.Dispose();
+
             // Check for errors
             if (result != UnityWebRequest.Result.Success)
             {
@@ -47,7 +58,6 @@ namespace Playmanity {
                 return response;
             }
         }
-
         public static response login(string username, string password)
         {
             playmanitySettings settings = playmanitySettings.Instance;
