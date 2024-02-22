@@ -20,17 +20,18 @@ public class gameManager : MonoBehaviour
 
         ad adTemplate = JsonConvert.DeserializeObject<ad>(res.message);
         Debug.Log(adTemplate);
-        Debug.Log(adTemplate.url);
+        //Debug.Log(adTemplate.url);
 
         GameObject defaultCanvas = Resources.Load<GameObject>("playmanityAdCanvas");
-        Sprite imageTexture = await LoadImage(adTemplate.url);
+        //Sprite imageTexture = await LoadImage(adTemplate.url);
 
         GameObject adCanvas = Instantiate(defaultCanvas);
 
         Image image = adCanvas.transform.GetChild(0).GetChild(0).GetChild(0).gameObject.GetComponent<Image>();
 
-        image.sprite = imageTexture;
+        image.sprite = await LoadImage(adTemplate.url);
     }
+
 
     async Task<Sprite> LoadImage(string url)
     {
