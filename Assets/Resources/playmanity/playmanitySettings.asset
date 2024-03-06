@@ -14,6 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   api_base: http://localhost:75
   startLevel: 1
-  UUID: 8a1dc44b-956c-447d-84ea-8ef0d83f63e8
-  forceKeyOverride: Y2JjYjBlYzAtZDVjZS00NzEzLWEzMWItZWYyYTFlNTQzYWEzJGh0dHBzOi8vYWRzZXJ2ZXIuYWR2ZXJ0eS5jb20=
-  SandboxMode: 1
