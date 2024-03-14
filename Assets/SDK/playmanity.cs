@@ -39,15 +39,16 @@ namespace Playmanity {
             {
                 await Task.Yield();
             }
-
+            Debug.Log(uwr.responseCode + " " + uwr.downloadHandler.text);
             response response = new response(uwr.responseCode, uwr.downloadHandler.text);
             UnityWebRequest.Result result = uwr.result;
-            uwr.Dispose();
+            
 
             // Check for errors
             if (result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError($"Error: {response.code}, {response.message}");
+                uwr.Dispose();
                 return response;
             }
             else
@@ -55,6 +56,7 @@ namespace Playmanity {
                 // Print status code
                 Debug.Log($"Status Code: {response.code}");
                 Debug.Log($"Response Body: {response.message}");
+                uwr.Dispose();
                 return response;
             }
         }

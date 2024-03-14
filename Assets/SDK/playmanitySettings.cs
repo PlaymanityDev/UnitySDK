@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class playmanitySettings : ScriptableObject
 {
-    public string api_base = "https://api.playmanity.net";
+    public string api_base = "https://canary.playmanity.net/api";
     public int startLevel = 1;
     public string UUID = "";
 

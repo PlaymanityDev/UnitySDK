@@ -10,6 +10,10 @@ public class loginManager : MonoBehaviour
     string username, password;
     public TMP_Text text;
 
+    public void InstantLoginWithToken(string data){
+        PlayerPrefs.SetString("playmanity-jwt-token", data);
+    }
+
     public void set_username(string value)
     {
         username = value;
@@ -18,6 +22,16 @@ public class loginManager : MonoBehaviour
     public void set_password(string value)
     {
         password = value;
+    }
+
+    public void set_usernameTMP_Text(TextMeshProUGUI value)
+    {
+        username = value.text;
+    }
+
+    public void set_passwordTMP_Text(TextMeshProUGUI value)
+    {
+        password = value.text;
     }
     public void login()
     {
