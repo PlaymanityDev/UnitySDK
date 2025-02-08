@@ -112,7 +112,7 @@ namespace PlaymanitySDK
                 {
                     infoText.text = "Enjoy!";
                     PlaymanityClient.AuthToken = statusResponse.token;
-                    _ = PlaymanityClient.InitSessionAsync();
+                    yield return PlaymanityClient.InitSessionAsync();
                     SceneManager.LoadSceneAsync(PSDKConfigManager.PostAuthScene);
                     yield break;
                 }

@@ -10,6 +10,8 @@ namespace PlaymanitySDK
         public static string AuthToken;
 
         public static bool IsSessionValid = false;
+        private static bool isSessionInitializing = false;
+        private static bool isSessionEnding = false;
 
         /// <summary>
         /// Initiates a session and then starts keep‐alive polling.
@@ -23,6 +25,9 @@ namespace PlaymanitySDK
                 return;
             }
 
+            if (isSessionInitializing || IsSessionValid) return;
+
+            isSessionInitializing = true;
             bool initiated = false;
             while (!initiated)
             {
@@ -51,13 +56,14 @@ namespace PlaymanitySDK
                         string errorDetails = (request.result != UnityWebRequest.Result.Success)
                             ? (request.error + " " + responseText)
                             : responseText;
-                        Debug.LogError("Session initiation failed: " + errorDetails);
+                        Debug.LogWarning("Session initiation failed: " + errorDetails);
 
                         Debug.Log("Retrying session initiation in 10 seconds...");
                         await Task.Delay(10000);
                     }
                 }
             }
+            isSessionInitializing = false;
         }
 
         /// <summary>
@@ -67,6 +73,7 @@ namespace PlaymanitySDK
         {
             while (IsSessionValid)
             {
+                if (!IsSessionValid || isSessionEnding) return;
                 await Task.Delay(9000);
                 var keepAlivePayload = new { authToken = AuthToken };
                 string keepAliveJson = JsonConvert.SerializeObject(keepAlivePayload);
@@ -78,6 +85,7 @@ namespace PlaymanitySDK
                     request.downloadHandler = new DownloadHandlerBuffer();
                     request.SetRequestHeader("Content-Type", "application/json");
 
+                    if (!IsSessionValid || isSessionEnding) return;
                     await request.SendWebRequestAsync();
 
                     string responseText = request.downloadHandler.text;
@@ -104,6 +112,10 @@ namespace PlaymanitySDK
                 return;
             }
 
+            if (isSessionEnding || !IsSessionValid) return; // Prevent redundant ending
+
+            isSessionEnding = true;
+
             var endPayload = new { auth = AuthToken };
             string endJson = JsonConvert.SerializeObject(endPayload);
 
@@ -118,7 +130,7 @@ namespace PlaymanitySDK
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("End session request failed: " + request.error);
+                    Debug.LogError("End session request failed: " + request.error + request.downloadHandler.text);
                 }
                 else
                 {
@@ -134,6 +146,7 @@ namespace PlaymanitySDK
                     }
                 }
             }
+            isSessionEnding = false;
         }
 
         public static Task<UnityWebRequest> SendWebRequestAsync(this UnityWebRequest request)
