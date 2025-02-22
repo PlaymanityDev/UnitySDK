@@ -38,7 +38,6 @@ namespace PlaymanitySDK
             initRequest.downloadHandler = new DownloadHandlerBuffer();
             initRequest.SetRequestHeader("Content-Type", "application/json");
 
-            // Send initial authentication request
             yield return initRequest.SendWebRequest();
             infoText.text = "Processing...";
 

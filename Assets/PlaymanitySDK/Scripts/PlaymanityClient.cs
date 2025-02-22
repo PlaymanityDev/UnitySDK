@@ -2,19 +2,20 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace PlaymanitySDK
 {
     public static class PlaymanityClient
     {
         public static string AuthToken;
-
         public static bool IsSessionValid = false;
         private static bool isSessionInitializing = false;
         private static bool isSessionEnding = false;
 
         /// <summary>
-        /// Initiates a session and then starts keep‐alive polling.
+        /// Initiates a session and then starts keep-alive polling.
         /// Retries every 10 seconds if initiation fails.
         /// </summary>
         public static async Task InitSessionAsync()
@@ -25,10 +26,15 @@ namespace PlaymanitySDK
                 return;
             }
 
-            if (isSessionInitializing || IsSessionValid) return;
+            if (isSessionInitializing || IsSessionValid)
+            {
+                Debug.Log("Session already initializing or valid, skipping initiation.");
+                return;
+            }
 
             isSessionInitializing = true;
             bool initiated = false;
+
             while (!initiated)
             {
                 var initPayload = new { auth = AuthToken };
@@ -41,7 +47,9 @@ namespace PlaymanitySDK
                     request.downloadHandler = new DownloadHandlerBuffer();
                     request.SetRequestHeader("Content-Type", "application/json");
 
+                    Debug.Log("Sending session initiation request...");
                     await request.SendWebRequestAsync();
+                    Debug.Log("Session initiation request completed.");
 
                     string responseText = request.downloadHandler.text;
                     if (request.result == UnityWebRequest.Result.Success && responseText.Contains("\"success\":true"))
@@ -57,7 +65,6 @@ namespace PlaymanitySDK
                             ? (request.error + " " + responseText)
                             : responseText;
                         Debug.LogWarning("Session initiation failed: " + errorDetails);
-
                         Debug.Log("Retrying session initiation in 10 seconds...");
                         await Task.Delay(10000);
                     }
@@ -67,14 +74,24 @@ namespace PlaymanitySDK
         }
 
         /// <summary>
-        /// Sends a keep-alive request every 9 seconds.
+        /// Sends a keep-alive request every 9 seconds. Private to ensure it's only called post-initiation.
         /// </summary>
-        public static async Task KeepSessionAliveAsync()
+        private static async Task KeepSessionAliveAsync()
         {
+            if (!IsSessionValid)
+            {
+                Debug.LogError("KeepSessionAliveAsync called without a valid session! This should not happen.");
+                return;
+            }
+
             while (IsSessionValid)
             {
-                if (!IsSessionValid || isSessionEnding) return;
-                await Task.Delay(9000);
+                if (isSessionEnding)
+                {
+                    Debug.Log("Session ending, stopping heartbeat.");
+                    return;
+                }
+
                 var keepAlivePayload = new { authToken = AuthToken };
                 string keepAliveJson = JsonConvert.SerializeObject(keepAlivePayload);
 
@@ -85,19 +102,21 @@ namespace PlaymanitySDK
                     request.downloadHandler = new DownloadHandlerBuffer();
                     request.SetRequestHeader("Content-Type", "application/json");
 
-                    if (!IsSessionValid || isSessionEnding) return;
                     await request.SendWebRequestAsync();
 
                     string responseText = request.downloadHandler.text;
                     if (request.result != UnityWebRequest.Result.Success)
                     {
                         Debug.LogError("Keep-alive request failed: " + request.error + " " + responseText);
+                        IsSessionValid = false;
                     }
                     else if (!responseText.Contains("\"success\":true"))
                     {
                         Debug.LogError("Session keep-alive error response: " + responseText);
+                        IsSessionValid = false;
                     }
                 }
+                await Task.Delay(9000);
             }
         }
 
@@ -112,7 +131,11 @@ namespace PlaymanitySDK
                 return;
             }
 
-            if (isSessionEnding || !IsSessionValid) return; // Prevent redundant ending
+            if (isSessionEnding || !IsSessionValid)
+            {
+                Debug.Log("Session already ending or not valid, skipping end request.");
+                return;
+            }
 
             isSessionEnding = true;
 
@@ -130,7 +153,7 @@ namespace PlaymanitySDK
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("End session request failed: " + request.error + request.downloadHandler.text);
+                    Debug.LogError("End session request failed: " + request.error + " " + request.downloadHandler.text);
                 }
                 else
                 {
@@ -157,6 +180,60 @@ namespace PlaymanitySDK
             return tcs.Task;
         }
 
+        public static async Task<Advertisement> GetAdvertisementAsync()
+        {
+            if (!IsSessionValid)
+            {
+                Debug.Log("Session is not valid.");
+                return null;
+            }
+
+            var payload = new
+            {
+                gameUuid = PSDKConfigManager.GameUUID,
+                authToken = AuthToken
+            };
+
+            string json = JsonConvert.SerializeObject(payload);
+
+            using (UnityWebRequest request = new UnityWebRequest($"{PSDKConfigManager.ServerURL}/advertisements", "POST"))
+            {
+                byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(json);
+                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", "application/json");
+
+                await request.SendWebRequestAsync();
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogError("Failed to fetch ad: " + request.error + " " + request.downloadHandler.text);
+                    return null;
+                }
+
+                try
+                {
+                    Debug.Log("Raw response: " + request.downloadHandler.text);
+
+                    var responseWrapper = JsonConvert.DeserializeObject<AdvertisementResponse>(request.downloadHandler.text);
+                    if (responseWrapper?.Ad != null)
+                    {
+                        return responseWrapper.Ad;
+                    }
+                    else
+                    {
+                        Debug.LogError("No advertisement data found in response.");
+                        return null;
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError("JSON parse error: " + ex.Message);
+                    return null;
+                }
+            }
+        }
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Initialize()
         {
@@ -166,6 +243,38 @@ namespace PlaymanitySDK
         private static async void OnApplicationQuit()
         {
             await EndSessionAsync();
+        }
+        public class AdvertisementResponse
+        {
+            [JsonProperty("ad")]
+            public Advertisement Ad { get; set; }
+        }
+
+        public class Advertisement
+        {
+            [JsonProperty("id")]
+            public int Id { get; set; }
+
+            [JsonProperty("title")]
+            public string Title { get; set; }
+
+            [JsonProperty("description")]
+            public string Description { get; set; }
+
+            [JsonProperty("type")]
+            public string Type { get; set; }
+
+            [JsonProperty("campaign")]
+            public int Campaign { get; set; }
+
+            [JsonProperty("url")]
+            public string Url { get; set; }
+
+            [JsonProperty("media")]
+            public string Media { get; set; }
+
+            [JsonProperty("isActive")]
+            public bool IsActive { get; set; }
         }
     }
 }
