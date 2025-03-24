@@ -25,7 +25,7 @@ namespace PlaymanitySDK
             var jsonPayload = new
             {
                 game_uuid = gameUUID,
-                device_id = deviceID
+                device_uuid = deviceID
             };
 
             string jsonString = JsonConvert.SerializeObject(jsonPayload);
@@ -149,7 +149,7 @@ namespace PlaymanitySDK
         [JsonProperty("status")]
         public AuthStatus status { get; set; }
 
-        [JsonProperty("token")]
+        [JsonProperty("auth_token")]
         public string token { get; set; }
 
         [JsonProperty("error")]
