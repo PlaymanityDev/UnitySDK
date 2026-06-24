@@ -70,22 +70,93 @@ namespace Playmanity.Unity
             EnsureAdController();
         }
 
-        private async void Start()
-        {
-            if (!validateOnStart)
-                return;
+    private async void Start()
+    {
+        gameId = ResolveRuntimeGameId(gameId);
 
-            try
+        if (IsAdSmokeTestEnabled())
+        {
+            RunSmokeTestAsync();
+        }
+
+        if (!validateOnStart)
+        {
+            return;
+        }
+
+        try
+        {
+            PlaymanityResponse response = await Client.PingAsync();
+            if (!response.success)
+                Debug.LogWarning("Playmanity startup validation failed: " + response.error);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning("Playmanity startup validation exception: " + ex.Message);
+        }
+    }
+
+    private bool IsAdSmokeTestEnabled()
+    {
+        string envValue = System.Environment.GetEnvironmentVariable(
+            "PLAYMANITY_AD_SMOKE_TEST"
+        );
+
+        if (
+            !string.IsNullOrWhiteSpace(envValue) &&
+            (envValue == "1" || envValue.Equals("true", System.StringComparison.OrdinalIgnoreCase))
+        ) {
+            return true;
+        }
+
+        string[] commandLineArgs = System.Environment.GetCommandLineArgs();
+        foreach (string arg in commandLineArgs)
+        {
+            if (string.Equals(arg, "--playmanity-ad-smoke-test", System.StringComparison.Ordinal))
             {
-                PlaymanityResponse response = await Client.PingAsync();
-                if (!response.success)
-                    Debug.LogWarning("Playmanity startup validation failed: " + response.error);
-            }
-            catch (System.Exception ex)
-            {
-                Debug.LogWarning("Playmanity startup validation exception: " + ex.Message);
+                return true;
             }
         }
+
+        return false;
+    }
+
+    private async void RunSmokeTestAsync()
+    {
+        const int smokeTestTimeoutMs = 15000;
+        Debug.Log("Playmanity smoke test started for gameId=" + gameId);
+
+        try
+        {
+            PlaymanityResponse response = await Client.RequestAdAsync(smokeTestTimeoutMs);
+            if (!response.success)
+            {
+                Debug.LogWarning($"Playmanity smoke test requestAd failed: {response.error}");
+
+                return;
+            }
+
+            Debug.Log("Playmanity smoke test passed. AdId=" + response.adId);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning("Playmanity smoke test exception: " + ex.Message);
+        }
+    }
+
+    private string ResolveRuntimeGameId(string defaultGameId)
+    {
+        string environmentGameId = System.Environment.GetEnvironmentVariable(
+            "PLAYMANITY_GAME_ID"
+        );
+
+        if (!string.IsNullOrWhiteSpace(environmentGameId))
+        {
+            return environmentGameId.Trim();
+        }
+
+        return defaultGameId;
+    }
 
         private void OnValidate()
         {
